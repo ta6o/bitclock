@@ -1,12 +1,12 @@
 # bitclock
 a digital clock for your terminal that automatically resizes itself, with customizable colors!
 
-# usage
+## usage
 ```
 $ gem install bitclock
 ```
 
-# command-line execution
+## command-line execution
 ```
 $ bitclock
 ```
@@ -19,7 +19,7 @@ or specify more for hours, minutes and seconds:
 $ bitclock red green blue
 ```
 
-# thanks
+## thanks
 this gem uses *Rainbow*, to get a cheerful nerdy looks.
 
 thanks for visiting this repo, it's my first gem and it's just a start!
