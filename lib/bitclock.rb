@@ -21,7 +21,7 @@ class BitClock
   begin
     $catch = IRB::Abort
   rescue
-    $catch = StandardError
+    $catch = Interrupt
   end
 
   def self.quit?
@@ -159,5 +159,5 @@ class BitClock
     end
   end
   colors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "default"]
-  BitClock.run ARGV.map{|arg| colors.include?(arg) ? arg : "default"} if $catch == StandardError
+  BitClock.run ARGV.map{|arg| colors.include?(arg) ? arg : "default"} if $catch == Interrupt
 end
