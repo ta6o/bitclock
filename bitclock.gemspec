@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'bitclock'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2015-07-11'
   s.summary     = "A digital clock for your terminal"
   s.description = "Automatically resizes itself on the terminal, with customizable colors!"
