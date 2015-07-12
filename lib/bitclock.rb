@@ -4,7 +4,9 @@ require 'rainbow'
 
 class BitClock
 
+  # how to fill the letters
   $full = "▮"
+  # hard-coded digits for display
   $nums = {
     "0" => [1,0,1,1,1,1,1],
     "1" => [0,0,0,0,1,0,1],
@@ -18,18 +20,17 @@ class BitClock
     "9" => [1,1,1,1,1,0,1],
   }
 
+  # to fix: detect if under ruby console
   begin
     $catch = IRB::Abort
   rescue
     $catch = Interrupt
   end
 
+  # check if user wants to quit ('q' key does not work)
   def self.quit?
     begin
       while c = STDIN.read_nonblock(1)
-        puts "X" * $width
-        File.open("out","a"){|f| f << c}
-        print "\r"+" "*$width
         return true if 'qQ'.split.include? c
       end
       false
@@ -41,6 +42,7 @@ class BitClock
       true
     end
   end
+
   def self.calc_constants
     ($height, $width) = `stty size`.split(/\s/).map(&:to_i)
     colpos = [39,33,27]
@@ -158,6 +160,7 @@ class BitClock
       BitClock.calc_constants unless "#{$height} #{$width}\n" == `stty size`
     end
   end
+
   colors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "default"]
   BitClock.run ARGV.map{|arg| colors.include?(arg) ? arg : "default"} if $catch == Interrupt
 end

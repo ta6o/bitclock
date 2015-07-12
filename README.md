@@ -9,6 +9,14 @@ $ gem install bitclock
 ## command-line execution
 ```
 $ bitclock
+                                                                           
+
+        ▮▮  ▮▮▮▮▮▮▮▮▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮▮▮▮▮▮▮▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮▮▮▮▮▮▮▮▮
+        ▮▮          ▮▮  ▮▮          ▮▮  ▮▮      ▮▮  ▮▮          ▮▮          ▮▮
+        ▮▮          ▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮      ▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮▮▮▮▮▮▮▮▮
+        ▮▮          ▮▮  ▮▮  ▮▮          ▮▮      ▮▮  ▮▮          ▮▮          ▮▮
+        ▮▮          ▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮▮▮▮▮▮▮▮▮      ▮▮▮▮▮▮▮▮▮▮  ▮▮▮▮▮▮▮▮▮▮ 
+                                                                             
 ```
 you can optionally give ANSI color names as arguments
 ```
