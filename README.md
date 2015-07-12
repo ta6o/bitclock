@@ -20,7 +20,7 @@ $ bitclock red green blue
 ```
 
 # thanks
-this gem requires *Rainbow*, to get a cheerful nerdy looks.
+this gem uses *Rainbow*, to get a cheerful nerdy looks.
 
-thanks for visiting this repo, it's my first gem and actually just a test to build more!
+thanks for visiting this repo, it's my first gem and it's just a start!
 
