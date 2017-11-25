@@ -1,7 +1,5 @@
 #! /bin/ruby
 
-require 'rainbow'
-
 class BitClock
 
   # how to fill the letters
@@ -105,13 +103,13 @@ class BitClock
       row = ""
       tarr.each_with_index do |num,ind|
         clr = $clr[ind]
-        BitClock.calc_pix(num[0],i).each {|pix| row += Rainbow(pix * $coef).color(clr)}
+        BitClock.calc_pix(num[0],i).each {|pix| row += "#{clr}#{pix * $coef}\e[0m"}
         row += " " * $coef
-        BitClock.calc_pix(num[1],i).each {|pix| row += Rainbow(pix * $coef).color(clr)}
+        BitClock.calc_pix(num[1],i).each {|pix| row += "#{clr}#{pix * $coef}\e[0m"}
         break if ind == 2
         row += " " * $coef
         if pts and [1,3].include?(i)
-          row += Rainbow($full * $coef).black
+          row += "\e[1m\e[30m#{($full * $coef)}\e[0m"
         else
           row += " " * $coef
         end
@@ -129,15 +127,18 @@ class BitClock
   end
 
   def self.run argv
+    td = argv.grep(Float)
+    argv -= td
+    td = td.any? ? (td.first * 60 * 60) : 0
     case argv.length
     when 3
-      $clr = argv.map &:to_sym
+      $clr = argv
     when 2
-      $clr = [argv[0],argv[0],argv[1]].map &:to_sym
+      $clr = [argv[0],argv[0],argv[1]]
     when 1
-      $clr = [argv[0],argv[0],argv[0]].map &:to_sym
+      $clr = [argv[0],argv[0],argv[0]]
     else
-      $clr = [:white,:white,:white]
+      $clr = ["\e[0m\e37m", "\e[0m\e37m", "\e[0m\e37m"]
     end
     while Time.now.strftime("%L").to_i < 999
     end
@@ -151,7 +152,7 @@ class BitClock
       end
       begin
         sleep 0.5
-        BitClock.print_clock Time.now, [false,true][(pts+1)/2]
+        BitClock.print_clock (Time.now + td), [false,true][(pts+1)/2]
         pts *= -1
       rescue $catch
         print "\r"+" "*$width
@@ -161,6 +162,22 @@ class BitClock
     end
   end
 
-  colors = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "default"]
-  BitClock.run ARGV.map{|arg| colors.include?(arg) ? arg : "default"} if $catch == Interrupt
+  colors = { "black" => "\e[1m\e[30m",
+             "red" => "\e[1m\e[31m",
+             "green" => "\e[1m\e[32m",
+             "yellow" => "\e[1m\e[33m",
+             "blue" => "\e[1m\e[34m",
+             "magenta" => "\e[1m\e[35m",
+             "cyan" => "\e[1m\e[36m",
+             "white" => "\e[1m\e[37m",
+             "default" => "\e[0m\e[37m",
+             "dark-red" => "\e[0m\e[31m",
+             "dark-green" => "\e[0m\e[32m",
+             "dark-yellow" => "\e[0m\e[33m",
+             "dark-blue" => "\e[0m\e[34m",
+             "dark-magenta" => "\e[0m\e[35m",
+             "dark-cyan" => "\e[0m\e[36m",
+             "dark-white" => "\e[0m\e[37m",
+            }
+  BitClock.run ARGV.map{|arg| colors.keys.include?(arg) ? colors[arg] : (arg.match(/^[+-]?\d[\d\.,]*$/) ? arg.to_f : colors["default"])} if $catch == Interrupt
 end
